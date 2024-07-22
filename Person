@@ -1,0 +1,61 @@
+abstract class Person {
+    private String name;
+    private String id;
+    
+    public Person(String name, String id) {
+        this.name = name;
+        this.id = id;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public String getId() {
+        return id;
+    }
+    
+    public abstract void displayInfo();
+}
+class Member extends Person {
+    private String membershipType;
+    
+    public Member(String name, String id, String membershipType) {
+        super(name, id);
+        this.membershipType = membershipType;
+    }
+    
+    public String getMembershipType() {
+        return membershipType;
+    }
+    
+    @Override
+    public void displayInfo() {
+        System.out.println("Member Name: " + getName());
+        System.out.println("Member ID: " + getId());
+        System.out.println("Membership Type: " + membershipType);
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Library library = new Library();
+        
+        // Adding books
+        Book book1 = new Book("The Great Gatsby", "F. Scott Fitzgerald", "1");
+        Book book2 = new Book("1984", "George Orwell", "2");
+        library.addBook(book1);
+        library.addBook(book2);
+        
+        // Adding members
+        Member member1 = new Member("Alice", "M1", "Gold");
+        Member member2 = new Member("Bob", "M2", "Silver");
+        library.addMember(member1);
+        library.addMember(member2);
+        
+        // Lending book
+        library.lendBook("M1", "1", "2024-07-13");
+        
+        // Generating report
+        library.generateReport();
+    }
+}
