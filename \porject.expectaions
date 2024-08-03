@@ -1,0 +1,14 @@
+package lmproject.exceptions;
+
+public class BookNotFoundException extends Exception {
+    public BookNotFoundException(String message) {
+        super(message);
+    }
+}
+package lmproject.exceptions;
+
+public class MemberNotFoundException extends Exception {
+    public MemberNotFoundException(String message) {
+        super(message);
+    }
+}
