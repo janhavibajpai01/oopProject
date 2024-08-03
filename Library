@@ -1,0 +1,60 @@
+package project;
+
+import java.util.ArrayList;
+import java.util.List;
+import project.exceptions.BookNotFoundException;
+import roject.exceptions.MemberNotFoundException;
+
+public class Library implements Manageable, Reportable {
+    private List<Book> books = new ArrayList<>();
+    private List<Member> members = new ArrayList<>();
+    private List<Transaction> transactions = new ArrayList<>();
+    
+    @Override
+    public void addBook(Book book) {
+        books.add(book);
+        System.out.println("Book added: " + book.getTitle());
+    }
+    
+    @Override
+    public void removeBook(String bookId) {
+        books.removeIf(book -> book.getId().equals(bookId));
+        System.out.println("Book removed: " + bookId);
+    }
+    
+    @Override
+    public void addMember(Member member) {
+        members.add(member);
+        System.out.println("Member added: " + member.getName());
+    }
+    
+    @Override
+    public void removeMember(String memberId) {
+        members.removeIf(member -> member.getId().equals(memberId));
+        System.out.println("Member removed: " + memberId);
+    }
+    
+    @Override
+    public void generateReport() {
+        System.out.println("Library Report:");
+        System.out.println("Books:");
+        books.forEach(book -> System.out.println(book.getTitle() + " by " + book.getAuthor()));
+        System.out.println("Members:");
+        members.forEach(member -> System.out.println(member.getName()));
+        System.out.println("Transactions:");
+        transactions.forEach(Transaction::displayTransaction);
+    }
+    
+    public void lendBook(String memberId, String bookId, String date) {
+        Member member = members.stream().filter(m -> m.getId().equals(memberId)).findFirst().orElse(null);
+        Book book = books.stream().filter(b -> b.getId().equals(bookId)).findFirst().orElse(null);
+        if (member != null && book != null && book.isAvailable()) {
+            book.setAvailable(false);
+            Transaction transaction = new Transaction(member, book, date);
+            transactions.add(transaction);
+            System.out.println("Book lent: " + book.getTitle() + " to " + member.getName());
+        } else {
+            System.out.println("Cannot lend book. Either book is unavailable or member not found.");
+        }
+    }
+}
