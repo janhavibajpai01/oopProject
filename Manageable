@@ -1,0 +1,8 @@
+package project;
+
+public interface Manageable {
+    void addBook(Book book);
+    void removeBook(String bookId);
+    void addMember(Member member);
+    void removeMember(String memberId);
+}
