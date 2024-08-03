@@ -1,0 +1,32 @@
+package project;
+
+public class Transaction {
+    private Member member;
+    private Book book;
+    private String date;
+    
+    public Transaction(Member member, Book book, String date) {
+        this.member = member;
+        this.book = book;
+        this.date = date;
+    }
+    
+    public Member getMember() {
+        return member;
+    }
+    
+    public Book getBook() {
+        return book;
+    }
+    
+    public String getDate() {
+        return date;
+    }
+    
+    public void displayTransaction() {
+        System.out.println("Transaction Details:");
+        System.out.println("Member: " + member.getName());
+        System.out.println("Book: " + book.getTitle());
+        System.out.println("Date: " + date);
+    }
+}
